@@ -1,6 +1,6 @@
 # Khöömei Cold Plunge
 
-A tiny, single-screen ice-swim arcade game: steer through floes, collect hot tea, and sustain an overtone before your core heat—and your confidence—hit zero.
+A tiny, single-screen, deliberately unforgiving ice-swim arcade game: steer through floes, collect hot tea, and sustain an overtone before your core heat—and your confidence—hit zero.
 
 ## Play
 
@@ -12,7 +12,7 @@ Open `index.html` or serve this folder with any static web server. The game is a
 - **Sound button:** mute/unmute
 - **Touch:** use the on-screen pad and hold-to-chant button
 
-Survive for 60 seconds. Hot tea warms you and restores breath; ice floes do the opposite. Your voice climbs up to 6 semitones as the cold meter rises.
+Survive for 60 seconds. Cold ramps up, floes arrive faster and more often, and hot tea is scarce. Chant in short bursts, dodge cleanly, and grab every thermos. Your voice climbs up to 6 semitones as the cold meter rises.
 
 ## Audio
 

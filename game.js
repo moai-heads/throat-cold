@@ -82,9 +82,9 @@
   for (let i = 0; i < 95; i++) snow.push({x:Math.random()*W,y:Math.random()*H,r:.5+Math.random()*1.9,s:.25+Math.random()*1.1,phase:Math.random()*9});
 
   function reset() {
-    elapsed = 0; cold = 10; breath = 100; score = 0; distance = 0; gameTime = 60;
+    elapsed = 0; cold = 15; breath = 100; score = 0; distance = 0; gameTime = 60;
     player = {x:260,y:455,vx:0,vy:0,blink:0};
-    objects = []; particles = []; spawnIce = 1.7; spawnTea = 2.6; invulnerable = 0; shake = 0; criticalAnnounced = false;
+    objects = []; particles = []; spawnIce = 1.15; spawnTea = 4.2; invulnerable = 0; shake = 0; criticalAnnounced = false;
     ui.score.textContent = '0000'; ui.time.textContent = '01:00'; ui.heat.style.width = '90%';
     ui.breath.style.width = '100%'; ui.heatStatus.textContent = 'TOASTY'; ui.breathStatus.textContent = 'READY';
     ui.pitch.textContent = 'NATURAL'; ui.frame.classList.remove('shivering');
@@ -164,10 +164,10 @@
   function spawn(kind) {
     const y = 340 + Math.random()*260;
     if (kind === 'ice') {
-      const size = 27 + Math.random()*27;
-      objects.push({kind,x:W+50,y,size,phase:Math.random()*8,variant:Math.random(),speed:260+elapsed*1.65});
+      const size = 31 + Math.random()*29;
+      objects.push({kind,x:W+50,y,size,phase:Math.random()*8,variant:Math.random(),speed:330+elapsed*2.3});
     } else {
-      objects.push({kind:'tea',x:W+45,y,size:26,phase:Math.random()*8,speed:245+elapsed*1.5});
+      objects.push({kind:'tea',x:W+45,y,size:26,phase:Math.random()*8,speed:265+elapsed*1.7});
     }
   }
   function burst(x,y,color,count=13) {
@@ -190,16 +190,16 @@
     player.blink += dt*9;
     invulnerable=Math.max(0,invulnerable-dt);
 
-    const chillRate = 1.38 + elapsed/60*.5;
+    const chillRate = 2.55 + elapsed/60*1.55;
     cold += chillRate*dt;
-    if (chanting && breath>0) { cold -= 3.15*dt; breath -= 34*dt; }
-    else { breath += 21*dt; }
+    if (chanting && breath>0) { cold -= 4.0*dt; breath -= 42*dt; }
+    else { breath += 16*dt; }
     breath=Math.max(0,Math.min(100,breath)); cold=Math.max(0,Math.min(100,cold));
     if (breath<=0) { chanting=false; updateChantButtons(); }
 
     spawnIce-=dt; spawnTea-=dt;
-    if(spawnIce<=0){spawn('ice');spawnIce=1.62+Math.random()*.85-Math.min(.45,elapsed/160)}
-    if(spawnTea<=0){spawn('tea');spawnTea=5.6+Math.random()*1.8}
+    if(spawnIce<=0){spawn('ice');spawnIce=1.05+Math.random()*.55-Math.min(.18,elapsed/200)}
+    if(spawnTea<=0){spawn('tea');spawnTea=6.8+Math.random()*1.8}
     const objSpeed=1;
     for(const o of objects){o.x-=o.speed*dt*objSpeed;o.phase+=dt*2;}
     for(let i=objects.length-1;i>=0;i--){
@@ -208,9 +208,9 @@
       const dx=o.x-player.x, dy=o.y-player.y, hitRadius=o.kind==='tea'?36:o.size*.72+19;
       if(dx*dx+dy*dy<hitRadius*hitRadius){
         if(o.kind==='tea'){
-          cold=Math.max(0,cold-19); breath=Math.min(100,breath+27); score+=125; burst(o.x,o.y,'#d7ff8c',19); showToast('HOT TEA! +125 / WARM BONES');
+          cold=Math.max(0,cold-15); breath=Math.min(100,breath+18); score+=125; burst(o.x,o.y,'#d7ff8c',19); showToast('HOT TEA! +125 / WARM BONES');
         } else if(invulnerable<=0){
-          cold=Math.min(100,cold+15); score=Math.max(0,score-35); invulnerable=1.1; shake=.22; burst(o.x,o.y,'#94eafa',12); showToast('ICE FLOE! YOUR ANCESTORS ARE DISAPPOINTED');
+          cold=Math.min(100,cold+22); score=Math.max(0,score-50); invulnerable=.72; shake=.22; burst(o.x,o.y,'#94eafa',12); showToast('ICE FLOE! YOUR ANCESTORS ARE DISAPPOINTED');
         }
         objects.splice(i,1);
       }
