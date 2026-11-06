@@ -12,7 +12,7 @@ Open `index.html` or serve this folder with any static web server. The game is a
 - **Sound button:** mute/unmute
 - **Touch:** use the on-screen pad and hold-to-chant button
 
-Survive for 60 seconds. Hot tea warms you and restores breath; ice floes do the opposite. Your voice climbs up to 16 semitones as the cold meter rises.
+Survive for 60 seconds. Hot tea warms you and restores breath; ice floes do the opposite. Your voice climbs up to 6 semitones as the cold meter rises.
 
 ## Audio
 

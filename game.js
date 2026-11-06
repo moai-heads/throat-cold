@@ -62,7 +62,7 @@
   }
   function setAudioLevel() {
     if (!audioCtx || !source) return;
-    const semitones = 16 * (cold / 100);
+    const semitones = 6 * (cold / 100);
     source.playbackRate.value = Math.pow(2, semitones / 12);
     const target = soundOn && state === 'playing' ? (chanting ? 0.32 : 0.23) : 0;
     audioGain.gain.setTargetAtTime(target, audioCtx.currentTime, 0.1);
@@ -228,7 +228,7 @@
     ui.heatStatus.textContent=cold<25?'TOASTY':cold<52?'BRISK':cold<76?'NUTS GETTING NERVOUS':cold<93?'ICICLE ZONE':'SEND HELP';
     ui.heatStatus.style.color=cold>68?'#ff9f88':'';
     ui.breathStatus.textContent=breath<20?'GASPING':chanting?'SUSTAINING':breath>85?'READY':'RECOVERING';
-    const semitones=16*(cold/100);
+    const semitones=6*(cold/100);
     ui.pitch.textContent=cold<13?'NATURAL':`↑ +${semitones.toFixed(1)} ST`;
     if(cold>=90&&!criticalAnnounced){criticalAnnounced=true;showToast('CRITICAL CHILL — VOICE PITCH GOING UP!')}
     ui.frame.classList.toggle('shivering',cold>75);
