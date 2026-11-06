@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#07121d">
+  <meta name="description" content="A throat-singing ice-swim survival arcade game. Keep the overtone. Keep your cool.">
+  <title>KHÖÖMEI COLD PLUNGE — an ice-swim arcade game</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9D%84%EF%B8%8F%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Khöömei Cold Plunge home">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span>FROST<span class="brand-dot">/</span>FOLK</span>
+      </a>
+      <div class="edition"><span class="live-dot"></span> A TINY ARCTIC ARCADE <span class="edition-sep">·</span> SHANGHAI 2026</div>
+      <button class="sound-toggle" id="soundToggle" type="button" aria-label="Toggle sound" title="Toggle sound">♫ <span id="soundLabel">SOUND ON</span></button>
+    </header>
+
+    <section class="intro-row">
+      <div>
+        <div class="eyebrow"><span>FIELD TEST 001</span><span class="eyebrow-line"></span><span>−18° / LAKE KHÖVSGÖL</span></div>
+        <h1>KHÖÖMEI <em>COLD PLUNGE</em></h1>
+        <p class="deck">Keep the overtone. Keep your cool. <span>Preferably both.</span></p>
+      </div>
+      <div class="best-card"><span>PERSONAL BEST</span><strong id="bestScore">0000</strong><small>POINTS</small></div>
+    </section>
+
+    <section class="game-frame" aria-label="Ice swim game">
+      <div class="hud">
+        <div class="meter-block heat-block">
+          <div class="meter-heading"><span class="meter-icon heat-icon">◉</span><span>CORE HEAT</span><b id="heatStatus">TOASTY</b></div>
+          <div class="meter-track"><div id="heatFill" class="meter-fill heat-fill"></div><span class="meter-tick"></span><span class="meter-tick"></span><span class="meter-tick"></span></div>
+        </div>
+        <div class="meter-block breath-block">
+          <div class="meter-heading"><span class="meter-icon breath-icon">〰</span><span>BREATH</span><b id="breathStatus">READY</b></div>
+          <div class="meter-track"><div id="breathFill" class="meter-fill breath-fill"></div><span class="meter-tick"></span><span class="meter-tick"></span><span class="meter-tick"></span></div>
+        </div>
+        <div class="score-card"><span>PLUNGE SCORE</span><strong id="scoreReadout">0000</strong></div>
+        <div class="time-card"><span>TIME IN</span><strong id="timeReadout">01:00</strong></div>
+      </div>
+
+      <div class="stage-wrap" id="stageWrap">
+        <canvas id="game" width="1200" height="680" aria-label="An ice swimmer dodges floes and collects hot tea"></canvas>
+        <div class="stage-vignette"></div>
+        <div class="stage-label"><span class="tiny-square"></span><span>KHÖVSÖL ICE ROUTE</span><span class="stage-label-line"></span><span id="stageWind">WIND 12 KT</span></div>
+        <div class="toast" id="toast" aria-live="polite"></div>
+        <div class="overlay" id="overlay">
+          <div class="overlay-card" id="overlayCard">
+            <div class="overlay-kicker"><span class="ice-star">✳</span> THE WATER IS 1°C. YOUR DIGNITY IS OPTIONAL.</div>
+            <h2 id="overlayTitle">SING<br><i>OR SHIVER.</i></h2>
+            <p id="overlayText">Steer through the floes. Snag hot tea. Hold a note to warm up—your breath won’t last forever.</p>
+            <button id="startButton" class="start-button" type="button"><span>TAKE THE PLUNGE</span><b>↗</b></button>
+            <div class="overlay-hint">60 SECONDS TO LEGEND <span>·</span> 0 SECONDS TO REGRET</div>
+          </div>
+          <div class="overlay-stamp"><span>NO<br>WIMPS</span><i>✳</i></div>
+        </div>
+      </div>
+
+      <div class="game-footer">
+        <div class="howto"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><span>SWIM</span><span class="howto-divider"></span><kbd class="space-key">SPACE</kbd><span>CHANT / WARM UP</span></div>
+        <button id="chantButton" class="chant-button" type="button" aria-label="Hold to chant and warm up"><span class="chant-rings">◎</span><span>HOLD TO CHANT</span><kbd>SPACE</kbd></button>
+        <div class="pitch-readout"><span class="sound-wave">∿</span><span>VOICE PITCH</span><b id="pitchReadout">NATURAL</b></div>
+      </div>
+      <div class="mobile-pad" aria-label="Touch controls">
+        <div class="dpad">
+          <button data-dir="up" aria-label="Swim up">↑</button><div><button data-dir="left" aria-label="Swim left">←</button><button data-dir="down" aria-label="Swim down">↓</button><button data-dir="right" aria-label="Swim right">→</button></div>
+        </div>
+        <button id="mobileChant" class="mobile-chant">HOLD TO CHANT <span>◎</span></button>
+      </div>
+    </section>
+
+    <footer class="page-footer"><span>AN OVERTONE-POWERED SURVIVAL TEST</span><span>BASED ON REAL THROAT SINGING. QUESTIONABLE THERMODYNAMICS.</span><span>PRESS <b>R</b> TO RESTART</span></footer>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
