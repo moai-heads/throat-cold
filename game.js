@@ -62,8 +62,8 @@
   }
   function setAudioLevel() {
     if (!audioCtx || !source) return;
-    const semitones = 10 * (cold / 100);
-    source.playbackRate.setTargetAtTime(Math.pow(2, semitones / 12), audioCtx.currentTime, 0.12);
+    const semitones = 16 * (cold / 100);
+    source.playbackRate.value = Math.pow(2, semitones / 12);
     const target = soundOn && state === 'playing' ? (chanting ? 0.32 : 0.23) : 0;
     audioGain.gain.setTargetAtTime(target, audioCtx.currentTime, 0.1);
   }
@@ -77,14 +77,14 @@
 
   const keys = new Set();
   let state = 'ready', elapsed = 0, cold = 0, breath = 100, score = 0, distance = 0;
-  let player, objects = [], particles = [], snow = [], spawnIce = 0, spawnTea = 0, chanting = false, invulnerable = 0;
+  let player = {x:260,y:455,vx:0,vy:0,blink:0}, objects = [], particles = [], snow = [], spawnIce = 0, spawnTea = 0, chanting = false, invulnerable = 0, criticalAnnounced = false;
   let last = performance.now(), shake = 0, toastTimer = 0, gameTime = 60;
   for (let i = 0; i < 95; i++) snow.push({x:Math.random()*W,y:Math.random()*H,r:.5+Math.random()*1.9,s:.25+Math.random()*1.1,phase:Math.random()*9});
 
   function reset() {
     elapsed = 0; cold = 10; breath = 100; score = 0; distance = 0; gameTime = 60;
     player = {x:260,y:455,vx:0,vy:0,blink:0};
-    objects = []; particles = []; spawnIce = 1.7; spawnTea = 2.6; invulnerable = 0; shake = 0;
+    objects = []; particles = []; spawnIce = 1.7; spawnTea = 2.6; invulnerable = 0; shake = 0; criticalAnnounced = false;
     ui.score.textContent = '0000'; ui.time.textContent = '01:00'; ui.heat.style.width = '90%';
     ui.breath.style.width = '100%'; ui.heatStatus.textContent = 'TOASTY'; ui.breathStatus.textContent = 'READY';
     ui.pitch.textContent = 'NATURAL'; ui.frame.classList.remove('shivering');
@@ -228,8 +228,9 @@
     ui.heatStatus.textContent=cold<25?'TOASTY':cold<52?'BRISK':cold<76?'NUTS GETTING NERVOUS':cold<93?'ICICLE ZONE':'SEND HELP';
     ui.heatStatus.style.color=cold>68?'#ff9f88':'';
     ui.breathStatus.textContent=breath<20?'GASPING':chanting?'SUSTAINING':breath>85?'READY':'RECOVERING';
-    const semitones=10*(cold/100);
-    ui.pitch.textContent=cold<13?'NATURAL':`${semitones.toFixed(1)} SEMITONES`;
+    const semitones=16*(cold/100);
+    ui.pitch.textContent=cold<13?'NATURAL':`↑ +${semitones.toFixed(1)} ST`;
+    if(cold>=90&&!criticalAnnounced){criticalAnnounced=true;showToast('CRITICAL CHILL — VOICE PITCH GOING UP!')}
     ui.frame.classList.toggle('shivering',cold>75);
     setAudioLevel();
     if(cold>=100){showEnd(false);}
